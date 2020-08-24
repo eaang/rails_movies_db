@@ -27,6 +27,7 @@ import $ from 'jquery';
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
+import { apiCall } from '../components/api_call'
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
@@ -39,5 +40,5 @@ document.addEventListener('turbolinks:load', () => {
   document.addEventListener("turbolinks:before-cache", function() {
     dataTable.destroy();
   });
-
+  apiCall();
 });
