@@ -39,4 +39,5 @@ document.addEventListener('turbolinks:load', () => {
   document.addEventListener("turbolinks:before-cache", function() {
     dataTable.destroy();
   });
+
 });
