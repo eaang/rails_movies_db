@@ -1,11 +1,17 @@
 const apiCall = () => {
   const input = document.querySelector("#movie-test-input")
   const button = document.querySelector("#movie-test-button")
+  const check = document.querySelector("#movie-test-result")
   const url = `http://www.omdbapi.com/?apikey=${gon.omdb}&t=`
   button.addEventListener("click", (e) => {
     e.preventDefault();
     const title = input.value.replace(/\s/g, '+');
-    console.log(url);
+    fetch(url + title)
+      .then(response => response.json())
+      .then(data => {
+        check.innerHTML = ""
+        check.innerHTML = data.Title
+      })
   })
 };
 
