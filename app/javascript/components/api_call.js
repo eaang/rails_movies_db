@@ -10,7 +10,10 @@ const apiCall = () => {
       .then(response => response.json())
       .then(data => {
         check.innerHTML = ""
-        check.innerHTML = data.Title
+        check.innerHTML = `
+          <strong>Title:</strong> ${data.Title}<br>
+          <strong>Plot:</strong> ${data.Plot}
+        `
       })
   })
 };
