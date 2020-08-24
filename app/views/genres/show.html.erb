@@ -1,0 +1,7 @@
+<h1>
+  <%= link_to 'All Genres', genres_path %>
+  <%= icon('fas', 'angle-right') %>
+  <%= @genre.name %> (<%= @movies.count %>)
+</h1>
+<p><%= @genre.description %></p>
+<%= render partial: "shared/table", locals: { movies: @movies }  %>      

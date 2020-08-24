@@ -1,0 +1,30 @@
+<h1>
+  All Genres (<%= @genres.size %> genres)
+</h1>
+
+<table id="datatable" class="table table-sm table-striped table-hover table-bordered dt-responsive" style="width:100%">
+  <thead>
+    <tr>
+      <th data-priority="1">Name</th>
+      <th data-priority="2">Movies</th>
+      <th data-priority="3">5🟊 Movies</th>
+      <th data-priority="4">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @genres.each do |genre| %>
+      <tr>
+      <td><p class="underline hover:text-gray-700"><%= link_to genre.name, genre %></p></td>
+      <td><%= genre.movies.count %></td>
+      <td>
+        <% movies = genre.movies.rated(5) %>
+        <%= "N/A" if movies.empty? %>
+        <%= movies.map { |movie| link_to movie.name, movie }.join(', ').html_safe %>
+      </td>
+      <td><%= genre.description %></td>
+      </tr>
+    <% end %>
+
+  </tbody>
+  
+</table>

@@ -1,0 +1,40 @@
+<h1 class="m-0">
+  Movie Statistics
+</h1>
+
+<div class="my-3">
+<h3>Total movies: <%= @movies.count %></h3>
+</div>
+
+<div class="my-3">
+<h3>Genres of Movies</h3>
+<%= pie_chart @genres_and_movies.group('genres.name').count, legend: 'right' %>
+</div>
+
+<div class="my-3">
+<h3>Our Reviews</h3>
+<%= column_chart [
+  {name: "Evan", data: @evan_reviews.group(:score).count },
+  {name: "Case", data: @case_reviews.group(:score).count }
+], legend: 'bottom' %>
+</div>
+
+<div class="row">
+  <div class="col-12 col-sm-6">
+  <h4>5🟊 Movies</h4>
+  <ul>
+    <% @top_rated.each do |movie| %>
+      <li><p class="underline hover:text-gray-700"><%= link_to movie.name, movie %></p></li>
+    <% end %>
+  </ul>
+  </div>
+
+  <div class="col-12 col-sm-6">
+  <h4>0🟊 Movies</h4>
+  <ul>
+    <% @bottom_rated.each do |movie| %>
+      <li><p class="underline hover:text-gray-700"><%= link_to movie.name, movie %></p></li>
+    <% end %>
+  </ul>
+  </div>
+</div>

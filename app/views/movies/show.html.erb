@@ -1,0 +1,62 @@
+<h1 class="m-0">
+  <%= link_to 'All Movies', movies_path %>
+  <%= icon('fas', 'angle-right') %>
+  <%= @movie.name %>
+</h1>
+
+<div class="small mb-3">
+  <%= @movie.rated %> | 
+  <%= @movie.showtime %> | 
+  <%= @movie.genres.map { |genre| link_to genre.name, genre }.join(", ").html_safe %> |
+  <%= @movie.release.strftime("%d %b %Y") %> (<%= @movie.country %>)
+</div>
+
+<div class="row">
+
+  <div class="col-md-4 text-center">
+    <%= image_tag @movie.poster, class: 'img-fluid mx-auto float-md-left' %>
+  </div>
+
+  <div class="col-md-8 px-4 px-md-3">
+
+    <div class="row font-italic">
+      <%= @movie.description %>
+    </div>
+
+    <div class="row my-3">
+      <ul class="list-unstyled mb-0">
+      <% @wanted.each do |thing| %>
+        <% unless @movie.send(thing) == 'N/A' %>
+          <% if thing == 'actors' %>
+            <li><strong>Stars:</strong> <%= @movie.send(thing) %>
+          <% else %>
+            <li><strong><%= thing.titleize %>:</strong> <%= @movie.send(thing) %>
+          <% end %>
+        <% end %>
+      <% end %>
+      </ul>
+    </div>
+
+    <hr/>
+
+    <div class="row">
+      <div class="col-4 text-center">
+        <div><%= link_to "Metascore", "https://www.imdb.com/title/#{@movie.imdb}/criticreviews" %></div>
+        <div>
+          <%= @movie.metascore.nil? ? "N/A" : (number_with_precision(@movie.metascore, strip_insignificant_zeros: true) + " / 100") %>
+        </div>
+      </div>
+      <div class="col-4 text-center">
+        <div><%= link_to "IMDb", "https://www.imdb.com/title/#{@movie.imdb}/" %></div>
+        <div>
+          <%= @movie.imdbrating.nil? ? "N/A" : (number_with_precision(@movie.imdbrating, strip_insignificant_zeros: true) + " / 10") %>
+        </div>
+      </div>
+      <div class="col-4 text-center">
+        <div>Our Score</div>
+        <div><%= number_with_precision(@movie.average, strip_insignificant_zeros: true) %> / 5</div>
+      </div>
+    </div>
+
+  </div>
+</div>
