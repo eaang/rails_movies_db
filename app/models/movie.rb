@@ -2,8 +2,6 @@ class Movie < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
   has_many :ratings, dependent: :destroy
-  has_many :favourites, dependent: :destroy
-  has_many :hates, dependent: :destroy
   has_and_belongs_to_many :genres
   has_many :users, through: :ratings
 
@@ -15,15 +13,15 @@ class Movie < ApplicationRecord
   end
 
   def evan_rating
-    ratings.first.score
+    ratings.empty? ? 'N/A' : ratings.first.score
   end
 
   def case_rating
-    ratings.last.score
+    ratings.empty? ? 'N/A' : ratings.last.score
   end
 
   def average
-    (evan_rating + case_rating) / 2.to_f
+    ratings.empty? ? 'N/A' : ((evan_rating + case_rating) / 2.to_f)
   end
 
   def showtime

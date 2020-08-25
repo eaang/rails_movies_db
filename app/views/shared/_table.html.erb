@@ -18,9 +18,9 @@
       <td>
         <%= render partial: "shared/modal", locals: {movie: movie} %>
       </td>
-      <td><%= ang_score = movie.ratings.first.score %></td>
-      <td><%= case_score = movie.ratings.last.score %></td>
-      <td><%= number_with_precision((ang_score + case_score)/2.to_f, strip_insignificant_zeros: true) %></td>
+      <td><%= movie.evan_rating %></td>
+      <td><%= movie.case_rating %></td>
+      <td><%= movie.average %></td>
       <td>
         <%= movie.genres.map { |genre| link_to genre.name, genre }.join(', ').html_safe %>
       </td>
