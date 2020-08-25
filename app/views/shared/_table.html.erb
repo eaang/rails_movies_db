@@ -1,4 +1,4 @@
-<table data-turbolinks='false' id="datatable" class="table table-sm table-striped table-hover table-bordered dt-responsive" style="width:100%">
+<table data-turbolinks='false' id="datatable" class="table table-striped table-hover dt-responsive" style="width:100%">
   <thead>
     <tr>
       <th data-priority="1">Title</th>
@@ -27,7 +27,7 @@
       <td><%= movie.description %></td>
       <% if user_signed_in? %>
       <td class="text-center">
-        <%= link_to icon('far', 'trash-alt'), movie, method: "delete", data: { confirm: "Are you sure?", disable_with: "Processing..." } %>
+        <%= link_to icon('far', 'trash-alt'), movie, method: "delete", class: 'text-danger', data: { confirm: "Delete this movie?" } %>
       </td>
       <% end %>
       </tr>

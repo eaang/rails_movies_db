@@ -23,6 +23,7 @@ class MoviesController < ApplicationController
 
   def new
     @movie = Movie.new
+    @rating = Rating.new
   end
 
   def create

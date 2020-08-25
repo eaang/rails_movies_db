@@ -1,14 +1,21 @@
-<h1 class="m-0">
-  <%= link_to 'All Movies', movies_path %>
-  <%= icon('fas', 'angle-right') %>
-  <%= @movie.name %> (<%= @movie.year %>)
+<h1 class="m-0 d-flex justify-content-between">
+  <div>
+    <%= link_to 'All Movies', movies_path %>
+    <%= icon('fas', 'angle-right') %>
+    <%= @movie.name %> (<%= @movie.year %>)
+  </div>
+  <% if user_signed_in? %>
+  <div>
+    <%= link_to icon('far', 'trash-alt'), @movie, method: "delete", class: 'text-danger', data: { confirm: "Delete this movie?" } %>
+  </div>
+  <% end %>
 </h1>
 
 <div class="small mb-3">
   <%= @movie.rated %> | 
   <%= @movie.showtime %> | 
   <%= @movie.genres.map { |genre| link_to genre.name, genre }.join(", ").html_safe %> |
-  <%= @movie.country %>
+  <%= @movie.country %> (<%= @movie.language %>)
 </div>
 
 <div class="row">

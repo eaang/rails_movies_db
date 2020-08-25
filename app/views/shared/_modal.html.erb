@@ -1,5 +1,4 @@
 <!-- Button trigger modal -->
-<div class="d-flex">
 <button class="btn btn-block btn-link text-left p-0" data-toggle="modal" data-target="#<%= movie.imdb %>">
   <%= movie.name %>
 </button>
@@ -12,7 +11,7 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-4 p-0">
-              <%= image_tag movie.poster, class: 'img-fluid mx-auto float-md-left' %>
+              <%= image_tag movie.poster, class: 'img-fluid mx-auto rounded-left float-md-left' %>
             </div>
             <div class="col-8 d-flex flex-column justify-content-between">
               <div class="row p-3">
@@ -33,7 +32,12 @@
                 </div>
               </div>
               <div class="row p-3">
-                <%= link_to 'See More', movie, class: 'btn btn-primary btn-block'%>
+                <% if user_signed_in? %>
+                  <%= link_to 'Delete Movie', movie, method: "delete", class: 'btn btn-danger col-6 rounded-0', data: { confirm: "Delete this movie?" } %>
+                  <%= link_to 'See More', movie, class: 'btn btn-primary col-6 rounded-0' %>
+                <% else %>
+                  <%= link_to 'See More', movie, class: 'btn btn-primary btn-block rounded-0' %>
+                <% end %>
               </div>
             </div>
           </div>

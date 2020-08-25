@@ -1,0 +1,23 @@
+<%= simple_form_for @movie do |f| %>
+  <div class="form-inline">
+    <%= f.input :name, label: false, placeholder: 'Enter movie name', input_html: { class: 'flex-fill' }, wrapper_html: { class: 'flex-fill' } %>
+    <%= f.button :button, icon('fas', 'search'), class: 'btn btn-primary', id: 'movie_button' %>
+  </div>
+  <div id="movie_result"></div>
+  <%= f.input :description %>
+  <%= f.input :year %>
+  <%= f.input :imdb %>
+  <%= f.input :director %>
+  <%= f.input :writer %>
+  <%= f.input :production %>
+  <%= f.input :awards %>
+  <%= f.input :actors %>
+  <%= f.input :imdbrating %>
+  <%= f.input :metascore %>
+  <%= f.input :runtime %>
+  <%= f.input :rated %>
+  <%= f.input :language %>
+  <%= f.input :country, as: :text %>
+  <%= f.input :poster %>
+  <%= f.button :submit, class: 'btn btn-success' %>
+<% end %>
