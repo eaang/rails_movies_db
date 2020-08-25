@@ -1,11 +1,12 @@
 <!-- Button trigger modal -->
-<button class="btn btn-link text-left p-0" data-toggle="modal" data-target="#<%= movie.imdb %>">
+<button class="btn btn-block btn-link text-left p-0" data-toggle="modal" data-target="#<%= movie.imdb %>">
   <%= movie.name %>
 </button>
+
 <!-- Modal -->
 <div class="modal fade" id="<%= movie.imdb %>" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
+    <div class="modal-content rounded-0 border-0">
       <div class="modal-body p-0">
         <div class="container-fluid">
           <div class="row">
@@ -16,22 +17,27 @@
               <div class="row p-3">
                 <div class="w-100">
                   <div class="d-flex justify-content-between align-items-start modal-title">
-                    <h5><%= movie.name %></h5>
+                    <h5><%= movie.name %> (<%= movie.year %>)</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
+                      <span class="mt-n1" aria-hidden="true">&times;</span>
                     </button>
                   </div>
                   <div class="small">
                     <%= movie.rated %> | 
                     <%= movie.showtime %> | 
-                    <%= movie.release.strftime("%d %b %Y") %> (<%= movie.country %>)
+                    <%= movie.country %>
                     <div><strong>Director:</strong> <%= movie.director %></div>
                     <div><strong>Starring:</strong> <%= movie.actors %></div>
                   </div>
                 </div>
               </div>
               <div class="row p-3">
-                <%= link_to 'See More', movie, class: 'btn btn-primary btn-block'%>
+                <% if user_signed_in? %>
+                  <%= link_to 'Delete Movie', movie, method: "delete", class: 'btn btn-danger col-6 rounded-0', data: { confirm: "Delete this movie?" } %>
+                  <%= link_to 'See More', movie, class: 'btn btn-primary col-6 rounded-0' %>
+                <% else %>
+                  <%= link_to 'See More', movie, class: 'btn btn-primary btn-block rounded-0' %>
+                <% end %>
               </div>
             </div>
           </div>

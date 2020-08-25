@@ -1,0 +1,36 @@
+<h1>Add New Movie</h1>
+
+<%= simple_form_for @movie do |f| %>
+  <div class="form-inline mb-sm-3" id="movie_title">
+    <%= f.input :name, label: false, placeholder: 'Enter movie name', input_html: { class: 'flex-fill rounded-0' }, wrapper_html: { class: 'flex-fill' } %>
+    <%= f.button :button, icon('fas', 'search'), class: 'btn btn-primary align-self-start rounded-0', id: 'movie_button' %>
+  </div>
+  <div class="form-row">
+    <div class="col-12 col-md-9 d-flex">
+    <%= f.input :description, label: false, placeholder: 'Movie plot', input_html: { class: 'align-self-stretch rounded-0' }, wrapper_html: { class: 'd-flex flex-fill' } %>
+    </div>
+    <div class="col-12 col-md-3 pb-3 d-flex">
+      <div id="poster" class="border flex-fill justify-content-around d-flex">
+      <span class="align-self-center text-muted">Movie poster</span>
+      </div>
+    </div>
+  </div>
+  <div class="d-none">
+    <%= f.input :actors %>
+    <%= f.input :director %>
+    <%= f.input :year %>
+    <%= f.input :imdb %>
+    <%= f.input :production %>
+    <%= f.input :awards %>
+    <%= f.input :writer %>
+    <%= f.input :imdbrating %>
+    <%= f.input :metascore %>
+    <%= f.input :runtime %>
+    <%= f.input :rated %>
+    <%= f.input :language %>
+    <%= f.input :country, as: :text %>
+    <%= f.input :poster %>
+    <%= f.input :genres, as: :text %>
+  </div>
+<%= f.button :submit, class: 'btn btn-success btn-block rounded-0' %>
+<% end %>

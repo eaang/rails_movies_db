@@ -67,3 +67,4 @@ gem 'name_of_person', '~> 1.1', '>= 1.1.1'
 gem 'jquery-rails'
 gem 'jquery-datatables'
 gem "chartkick"
+gem 'gon'

@@ -1,14 +1,21 @@
-<h1 class="m-0">
-  <%= link_to 'All Movies', movies_path %>
-  <%= icon('fas', 'angle-right') %>
-  <%= @movie.name %>
+<h1 class="m-0 d-flex justify-content-between">
+  <div>
+    <%= link_to 'All Movies', movies_path %>
+    <%= icon('fas', 'angle-right') %>
+    <%= @movie.name %> (<%= @movie.year %>)
+  </div>
+  <% if user_signed_in? %>
+  <div>
+    <%= link_to icon('far', 'trash-alt'), @movie, method: "delete", class: 'text-danger', data: { confirm: "Delete this movie?" } %>
+  </div>
+  <% end %>
 </h1>
 
 <div class="small mb-3">
   <%= @movie.rated %> | 
   <%= @movie.showtime %> | 
   <%= @movie.genres.map { |genre| link_to genre.name, genre }.join(", ").html_safe %> |
-  <%= @movie.release.strftime("%d %b %Y") %> (<%= @movie.country %>)
+  <%= @movie.country %> (<%= @movie.language %>)
 </div>
 
 <div class="row">
@@ -54,7 +61,9 @@
       </div>
       <div class="col-4 text-center">
         <div>Our Score</div>
-        <div><%= number_with_precision(@movie.average, strip_insignificant_zeros: true) %> / 5</div>
+        <div>
+          <%= @movie.average.is_a?(String) ? @movie.average : (number_with_precision(@movie.average, strip_insignificant_zeros: true) + " / 10") %>
+        </div>
       </div>
     </div>
 

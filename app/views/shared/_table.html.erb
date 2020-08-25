@@ -1,4 +1,4 @@
-<table data-turbolinks='false' id="datatable" class="table table-sm table-striped table-hover table-bordered dt-responsive" style="width:100%">
+<table data-turbolinks='false' id="datatable" class="table table-striped table-hover dt-responsive" style="width:100%">
   <thead>
     <tr>
       <th data-priority="1">Title</th>
@@ -7,6 +7,9 @@
       <th data-priority="2">Average</th>
       <th data-priority="4">Genres</th>
       <th data-priority="5">Plot</th>
+      <% if user_signed_in? %>
+      <th data-priority="2"></th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -15,13 +18,18 @@
       <td>
         <%= render partial: "shared/modal", locals: {movie: movie} %>
       </td>
-      <td><%= ang_score = movie.ratings.first.score %></td>
-      <td><%= case_score = movie.ratings.last.score %></td>
-      <td><%= number_with_precision((ang_score + case_score)/2.to_f, strip_insignificant_zeros: true) %></td>
+      <td><%= movie.evan_rating %></td>
+      <td><%= movie.case_rating %></td>
+      <td><%= movie.average.is_a?(String) ? movie.average : (number_with_precision(movie.average, strip_insignificant_zeros: true)) %></td>
       <td>
         <%= movie.genres.map { |genre| link_to genre.name, genre }.join(', ').html_safe %>
       </td>
       <td><%= movie.description %></td>
+      <% if user_signed_in? %>
+      <td class="text-center">
+        <%= link_to icon('far', 'trash-alt'), movie, method: "delete", class: 'text-danger', data: { confirm: "Delete this movie?" } %>
+      </td>
+      <% end %>
       </tr>
     <% end %>
 

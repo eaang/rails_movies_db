@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
   <%= link_to "Our Movies", root_path, class: "navbar-brand" %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavMain" aria-controls="navbarNavMain" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -11,10 +11,10 @@
     </div>
     <div class="navbar-nav">
       <% if user_signed_in? %>
-        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger mr-lg-3 mb-2 mb-lg-0" %>
-        <%= link_to "New movie", "#", class: "btn btn-primary" %>
+        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "rounded-0 btn btn-outline-danger mr-lg-3 mb-2 mb-lg-0" %>
+        <%= link_to "New movie", new_movie_path, class: "rounded-0 btn btn-primary" %>
       <% else %>
-        <%= link_to "Login", new_user_session_path, class: "btn btn-primary" %>
+        <%= link_to "Login", new_user_session_path, class: "rounded-0 btn btn-primary" %>
       <% end %>
     </div>
   </div>
