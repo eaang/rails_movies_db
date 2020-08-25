@@ -7,3 +7,25 @@
 
 <div id="movie-test-result">
 </div>
+
+<%= simple_form_for @movie do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.input :year %>
+  <%= f.input :imdb %>
+  <%= f.input :director %>
+  <%= f.input :writer %>
+  <%= f.input :production %>
+  <%= f.input :awards %>
+  <%= f.input :actors %>
+  <%= f.input :imdbrating %>
+  <%= f.input :metascore %>
+  <%= f.input :runtime, as: :text %>
+  <%= f.input :rated %>
+  <%= f.input :release, as: :text %>
+  <%= f.input :language %>
+  <%= f.input :country, as: :text %>
+  <%= f.input :poster %>
+  <%= f.button :submit, class: 'btn btn-success' %>
+<% end %>
+     

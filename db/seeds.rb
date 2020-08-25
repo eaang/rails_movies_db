@@ -22,7 +22,7 @@ end
 
 movie_data = CSV.parse(open(movie_url), headers: :first_row)
 genre_data = CSV.parse(open(genre_url), headers: :first_row)
-API_URL = "http://www.omdbapi.com/?apikey=#{ENV['OMDB']}&t=".freeze
+api_url = "http://www.omdbapi.com/?apikey=#{ENV['OMDB']}&t=".freeze
 
 genre_data.each do |row|
   Genre.create(name: row[0].force_encoding('utf-8'), description: row[1].force_encoding('utf-8'))
@@ -30,7 +30,7 @@ genre_data.each do |row|
 end
 
 movie_data.each do |row|
-  response = HTTParty.get(API_URL + row[0])
+  response = HTTParty.get(api_url + row[0])
   movie = Movie.create(
     name: response['Title'],
     description: response['Plot'],

@@ -1,5 +1,15 @@
 class MoviesController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show, :stats ]
+  before_action :set_movie, only: [:show, :edit, :update, :destroy]
+
+  def data(title)
+    require 'csv'
+    require 'json'
+    require 'open-uri'
+    api_url = "http://www.omdbapi.com/?apikey=#{ENV['OMDB']}&t=".freeze
+    search = title.gsub('&', '%26').gsub(' ', '+')
+    HTTParty.get(api_url + search.to_s)
+  end
 
   def index
     @movies = Movie.all.includes(:genres).includes(:ratings)
@@ -7,13 +17,21 @@ class MoviesController < ApplicationController
   end
 
   def show
-    @movie = Movie.friendly.find(params[:id])
     @wanted = %w[director writer actors production awards]
     @title = @movie.name
   end
 
   def new
     @movie = Movie.new
+  end
+
+  def create
+    @movie = orm_class.build(class_name, movie_params)
+    if @movie.save
+      redirect_to @movie, notice: "'#{movie.title} was successfully created.'"
+    else
+      render :new
+    end
   end
 
   def stats
@@ -26,5 +44,21 @@ class MoviesController < ApplicationController
     @case_reviews = ratings.where(user_id: 2)
     @top_rated = Movie.rated(5).sort_by { |e| e[:name] }
     @bottom_rated = Movie.rated(0).sort_by { |e| e[:name] }
+  end
+
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_movie
+    @movie = Movie.friendly.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def movie_params
+    params.require(:movie).permit(
+      :name, :description, :year, :imdb, :director, :writer,
+      :production, :awards, :actors, :imdbrating, :metascore, :runtime,
+      :rated, :release, :language, :country, :poster, :slug
+    )
   end
 end
