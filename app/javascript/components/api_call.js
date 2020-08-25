@@ -32,7 +32,7 @@ const apiCall = () => {
           if (data.Response === 'False') {
             $('#movie_title').popover({
               trigger: 'manual',
-              placement: 'bottom'
+              placement: 'top'
             });
             $('#movie_title').attr("data-content", data.Error).popover('show');
           } else {
