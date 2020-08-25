@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  get 'ratings/create'
-  resources :movies
+  resources :movies do
+    resources :ratings, only: [:new, :create]
+  end
   get '/statistics', to: 'movies#stats', as: 'stats'
   resources :genres, only: [:index, :show]
-  resources :ratings, only: [:create]
 
   devise_for :users
   root to: 'pages#home'

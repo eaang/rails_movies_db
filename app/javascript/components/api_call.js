@@ -2,7 +2,7 @@ import $ from 'jquery';
 
 const apiCall = () => {
   const button = document.querySelector("#movie_button")
-  const url = `http://www.omdbapi.com/?apikey=${gon.omdb}&t=`
+  const url = `https://www.omdbapi.com/?apikey=${gon.omdb}&t=`
   if (button) {
     // movie data fields
     const movieName = document.querySelector("#movie_name")
