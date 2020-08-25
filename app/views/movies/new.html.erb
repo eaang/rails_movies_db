@@ -1,11 +1,11 @@
 <h1>New Movie</h1>
 
 <%= simple_form_for @movie do |f| %>
-  <%= f.input :name %>
-  <div class=d-flex>
-    <%= f.button :button, 'Check Title', class: 'btn btn-primary', id: 'movie_button' %>
-    <div id="movie_result"></div>
+  <div class="form-inline">
+    <%= f.input :name, label: false, placeholder: 'Enter movie name', input_html: { class: 'flex-fill' }, wrapper_html: { class: 'flex-fill' } %>
+    <%= f.button :button, icon('fas', 'search'), class: 'btn btn-primary', id: 'movie_button' %>
   </div>
+  <div id="movie_result"></div>
   <%= f.input :description %>
   <%= f.input :year %>
   <%= f.input :imdb %>

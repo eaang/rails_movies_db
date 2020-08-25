@@ -7,6 +7,9 @@
       <th data-priority="2">Average</th>
       <th data-priority="4">Genres</th>
       <th data-priority="5">Plot</th>
+      <% if user_signed_in? %>
+      <th data-priority="2"></th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -22,6 +25,11 @@
         <%= movie.genres.map { |genre| link_to genre.name, genre }.join(', ').html_safe %>
       </td>
       <td><%= movie.description %></td>
+      <% if user_signed_in? %>
+      <td class="text-center">
+        <%= link_to icon('far', 'trash-alt'), movie, method: "delete", data: { confirm: "Are you sure?", disable_with: "Processing..." } %>
+      </td>
+      <% end %>
       </tr>
     <% end %>
 

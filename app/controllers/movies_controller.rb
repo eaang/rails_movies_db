@@ -26,12 +26,17 @@ class MoviesController < ApplicationController
   end
 
   def create
-    @movie = orm_class.build(class_name, movie_params)
+    @movie = Movie.new(movie_params)
     if @movie.save
-      redirect_to @movie, notice: "'#{movie.title} was successfully created.'"
+      redirect_to @movie, notice: "'#{@movie.title} was successfully created.'"
     else
       render :new
     end
+  end
+
+  def destroy
+    @movie.destroy
+    redirect_to movies_path, notice: "#{@movie.title} was successfully deleted."
   end
 
   def stats
@@ -58,7 +63,7 @@ class MoviesController < ApplicationController
     params.require(:movie).permit(
       :name, :description, :year, :imdb, :director, :writer,
       :production, :awards, :actors, :imdbrating, :metascore, :runtime,
-      :rated, :language, :country, :poster, :slug
+      :rated, :language, :country, :poster
     )
   end
 end
