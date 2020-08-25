@@ -23,22 +23,14 @@ require("chart.js");
 
 // External imports
 import "bootstrap";
-import $ from 'jquery';
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 import { apiCall } from '../components/api_call'
+import { tableCode } from '../components/datatable'
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
-  const dataTable = $('#datatable').DataTable({
-    responsive: true,
-    stateSave: true
-  })
-  .columns.adjust()
-  .responsive.recalc();
-  document.addEventListener("turbolinks:before-cache", function() {
-    dataTable.destroy();
-  });
   apiCall();
+  tableCode();
 });

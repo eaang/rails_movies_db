@@ -19,7 +19,7 @@
       <td>
         <% movies = genre.movies.rated(5) %>
         <%= "N/A" if movies.empty? %>
-        <%= movies.map { |movie| link_to movie.name, movie }.join(', ').html_safe %>
+        <%= movies.map { |movie| render partial: "shared/modal", locals: {movie: movie} }.join("").html_safe %>
       </td>
       <td><%= genre.description %></td>
       </tr>
