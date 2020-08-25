@@ -5,15 +5,22 @@
     <%= f.input :name, label: false, placeholder: 'Enter movie name', input_html: { class: 'flex-fill' }, wrapper_html: { class: 'flex-fill' } %>
     <%= f.button :button, icon('fas', 'search'), class: 'btn btn-primary align-self-start', id: 'movie_button' %>
   </div>
+  <div class="form-row">
+    <div class="col">
+    <%= f.input :description, label: false, placeholder: 'Movie plot' %>
+    </div>
+    <div class="col">
+    <%= f.input :actors, label: false, disabled: true, placeholder: 'Starring' %>
+    </div>
+  </div>
   <div class="d-none">
+    <%= f.input :director %>
     <%= f.input :description %>
     <%= f.input :year %>
     <%= f.input :imdb %>
-    <%= f.input :director %>
-    <%= f.input :writer %>
     <%= f.input :production %>
     <%= f.input :awards %>
-    <%= f.input :actors %>
+    <%= f.input :writer %>
     <%= f.input :imdbrating %>
     <%= f.input :metascore %>
     <%= f.input :runtime %>
