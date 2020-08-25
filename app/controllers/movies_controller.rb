@@ -31,7 +31,7 @@ class MoviesController < ApplicationController
     genres.map! { |name| Genre.find_or_create_by(name: name) }
     genres.each { |genre| @movie.genres << genre }
     if @movie.save
-      redirect_to @movie, notice: "#{@movie.name} was successfully created."
+      redirect_to new_movie_rating, notice: "#{@movie.name} was successfully created."
     else
       render :new
     end
