@@ -45,7 +45,6 @@ movie_data.each do |row|
     metascore: response['Metascore'] == 'N/A' ? nil : response['Metascore'],
     runtime: response['Runtime'][/(^\d*)/, 1].to_i,
     rated: response['Rated'],
-    release: DateTime.parse(response['Released']),
     language: response['Language'],
     country: response['Country'],
     poster: response['Poster']

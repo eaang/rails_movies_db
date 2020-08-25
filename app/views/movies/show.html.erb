@@ -1,14 +1,14 @@
 <h1 class="m-0">
   <%= link_to 'All Movies', movies_path %>
   <%= icon('fas', 'angle-right') %>
-  <%= @movie.name %>
+  <%= @movie.name %> (<%= @movie.year %>)
 </h1>
 
 <div class="small mb-3">
   <%= @movie.rated %> | 
   <%= @movie.showtime %> | 
   <%= @movie.genres.map { |genre| link_to genre.name, genre }.join(", ").html_safe %> |
-  <%= @movie.release.strftime("%d %b %Y") %> (<%= @movie.country %>)
+  <%= @movie.country %>
 </div>
 
 <div class="row">

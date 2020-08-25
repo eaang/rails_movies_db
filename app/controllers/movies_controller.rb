@@ -58,7 +58,7 @@ class MoviesController < ApplicationController
     params.require(:movie).permit(
       :name, :description, :year, :imdb, :director, :writer,
       :production, :awards, :actors, :imdbrating, :metascore, :runtime,
-      :rated, :release, :language, :country, :poster, :slug
+      :rated, :language, :country, :poster, :slug
     )
   end
 end

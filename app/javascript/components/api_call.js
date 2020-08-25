@@ -1,7 +1,6 @@
 const apiCall = () => {
-  const input = document.querySelector("#movie-test-input")
-  const button = document.querySelector("#movie-test-button")
-  const check = document.querySelector("#movie-test-result")
+  const button = document.querySelector("#movie_button")
+  const check = document.querySelector("#movie_result")
   const url = `http://www.omdbapi.com/?apikey=${gon.omdb}&t=`
   if (button) {
     // movie data fields
@@ -18,18 +17,17 @@ const apiCall = () => {
     const movieMetascore = document.querySelector("#movie_metascore")
     const movieRuntime = document.querySelector("#movie_runtime")
     const movieRated = document.querySelector("#movie_rated")
-    const movieRelease = document.querySelector("#movie_release")
     const movieLanguage = document.querySelector("#movie_language")
     const movieCountry = document.querySelector("#movie_country")
     const moviePoster = document.querySelector("#movie_poster")
 
     button.addEventListener("click", (e) => {
       e.preventDefault();
-      const title = input.value.replace(/\s/g, '+').replace('&', '%26');
+      const title = movieName.value.replace(/\s/g, '+').replace('&', '%26');
       fetch(url + title)
         .then(response => response.json())
         .then(data => {
-          check.innerHTML = ""
+          check.innerHTML = ''
           if (data.Response === 'False') {
             check.innerHTML = data.Error
           } else {
@@ -44,15 +42,11 @@ const apiCall = () => {
             movieActors.value = data.Actors
             movieImdbrating.value = data.imdbRating
             movieMetascore.value = data.Metascore
-            movieRuntime.value = data.Runtime
+            movieRuntime.value = data.Runtime.match(/\d+/g)
             movieRated.value = data.Rated
-            movieRelease.value = data.Released
             movieLanguage.value = data.Language
             movieCountry.value = data.Country
             moviePoster.value = data.Poster
-            check.innerHTML = `
-              <strong>Title:</strong> ${data.Title}<br>
-              <strong>Plot:</strong> ${data.Plot}`
           }
         })
     })
