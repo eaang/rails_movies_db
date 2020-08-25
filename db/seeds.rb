@@ -14,10 +14,12 @@ genre_url = 'https://www.dropbox.com/s/wkl4kk0svrba8wr/genres.csv?dl=1'
 
 user1 = User.find_or_create_by(email: 'ang@test.com') do |user|
   user.password = 'password'
+  user.first_name = 'Evan'
 end
 
 user2 = User.find_or_create_by(email: 'case@test.com') do |user|
   user.password = 'password'
+  user.first_name = 'Case'
 end
 
 movie_data = CSV.parse(open(movie_url), headers: :first_row)
