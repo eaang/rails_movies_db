@@ -23,11 +23,13 @@ class MoviesController < ApplicationController
 
   def new
     @movie = Movie.new
-    @rating = Rating.new
   end
 
   def create
     @movie = Movie.new(movie_params)
+    genres = params[:movie]["genres"].split(', ')
+    genres.map! { |name| Genre.find_or_create_by(name: name) }
+    genres.each { |genre| @movie.genres << genre }
     if @movie.save
       redirect_to @movie, notice: "#{@movie.name} was successfully created."
     else

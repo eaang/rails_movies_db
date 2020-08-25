@@ -61,7 +61,9 @@
       </div>
       <div class="col-4 text-center">
         <div>Our Score</div>
-        <div><%= number_with_precision(@movie.average, strip_insignificant_zeros: true) %> / 5</div>
+        <div>
+          <%= @movie.average.is_a?(String) ? @movie.average : (number_with_precision(@movie.average, strip_insignificant_zeros: true) + " / 10") %>
+        </div>
       </div>
     </div>
 

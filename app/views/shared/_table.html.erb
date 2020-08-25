@@ -20,7 +20,7 @@
       </td>
       <td><%= movie.evan_rating %></td>
       <td><%= movie.case_rating %></td>
-      <td><%= movie.average %></td>
+      <td><%= movie.average.is_a?(String) ? movie.average : (number_with_precision(movie.average, strip_insignificant_zeros: true)) %></td>
       <td>
         <%= movie.genres.map { |genre| link_to genre.name, genre }.join(', ').html_safe %>
       </td>

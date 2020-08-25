@@ -21,7 +21,11 @@ class Movie < ApplicationRecord
   end
 
   def average
-    ratings.empty? ? 'N/A' : ((evan_rating + case_rating) / 2.to_f)
+    if evan_rating == 'N/A' || case_rating == 'N/A'
+      'N/A'
+    else
+      (evan_rating + case_rating) / 2.to_f
+    end
   end
 
   def showtime

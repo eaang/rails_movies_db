@@ -21,6 +21,8 @@ const apiCall = () => {
     const movieLanguage = document.querySelector("#movie_language")
     const movieCountry = document.querySelector("#movie_country")
     const moviePoster = document.querySelector("#movie_poster")
+    const movieGenres = document.querySelector("#movie_genres")
+    const poster = document.querySelector("#poster")
 
     button.addEventListener("click", (e) => {
       e.preventDefault();
@@ -30,12 +32,15 @@ const apiCall = () => {
         .then(response => response.json())
         .then(data => {
           if (data.Response === 'False') {
+            poster.innerHTML = `<span class="align-self-center text-muted">Movie poster</span>`
+            movieDescription.value = ''
             $('#movie_title').popover({
               trigger: 'manual',
               placement: 'top'
             });
             $('#movie_title').attr("data-content", data.Error).popover('show');
           } else {
+            poster.innerHTML = `<img src="${data.Poster}" class="img-fluid">`
             movieName.value = data.Title
             movieDescription.value = data.Plot
             movieYear.value = data.Year
@@ -51,6 +56,7 @@ const apiCall = () => {
             movieRated.value = data.Rated
             movieLanguage.value = data.Language
             movieCountry.value = data.Country
+            movieGenres.value = data.Genre
             moviePoster.value = data.Poster
           }
         })
