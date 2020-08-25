@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'ratings/create'
   resources :movies do
     resources :ratings, only: [:new, :create]
   end

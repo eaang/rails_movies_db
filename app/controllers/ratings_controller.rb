@@ -1,7 +1,6 @@
 class RatingsController < ApplicationController
   def new
     @rating = Rating.new
-    @movie = Movie.friendly.find(params[:id])
   end
 
   def create
