@@ -1,6 +1,7 @@
+import $ from 'jquery';
+
 const apiCall = () => {
   const button = document.querySelector("#movie_button")
-  const check = document.querySelector("#movie_result")
   const url = `http://www.omdbapi.com/?apikey=${gon.omdb}&t=`
   if (button) {
     // movie data fields
@@ -24,12 +25,16 @@ const apiCall = () => {
     button.addEventListener("click", (e) => {
       e.preventDefault();
       const title = movieName.value.replace(/\s/g, '+').replace('&', '%26');
+      $('#movie_title').popover('hide')
       fetch(url + title)
         .then(response => response.json())
         .then(data => {
-          check.innerHTML = ''
           if (data.Response === 'False') {
-            check.innerHTML = data.Error
+            $('#movie_title').popover({
+              trigger: 'manual',
+              placement: 'bottom'
+            });
+            $('#movie_title').attr("data-content", data.Error).popover('show');
           } else {
             movieName.value = data.Title
             movieDescription.value = data.Plot
