@@ -10,10 +10,13 @@ const apiCall = () => {
       .then(response => response.json())
       .then(data => {
         check.innerHTML = ""
-        check.innerHTML = `
-          <strong>Title:</strong> ${data.Title}<br>
-          <strong>Plot:</strong> ${data.Plot}
-        `
+        if (data.Response === 'False') {
+          check.innerHTML = data.Error
+        } else {
+          check.innerHTML = `
+            <strong>Title:</strong> ${data.Title}<br>
+            <strong>Plot:</strong> ${data.Plot}`
+        }
       })
   })
 };
