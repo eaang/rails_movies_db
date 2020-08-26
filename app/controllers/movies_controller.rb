@@ -18,7 +18,7 @@ class MoviesController < ApplicationController
   end
 
   def show
-    @wanted = %w[director writer actors production awards]
+    @wanted = %w[director writer stars production awards]
     @title = @movie.name
     @partner = User.where.not(id: current_user).first
     if @partner.id == 1

@@ -42,7 +42,7 @@ movie_data.each do |row|
     writer: response['Writer'],
     production: response['Production'],
     awards: response['Awards'],
-    actors: response['Actors'],
+    stars: response['Actors'],
     imdbrating: response['imdbRating'] == 'N/A' ? nil : response['imdbRating'],
     metascore: response['Metascore'] == 'N/A' ? nil : response['Metascore'],
     runtime: response['Runtime'][/(^\d*)/, 1].to_i,
