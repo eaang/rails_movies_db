@@ -32,5 +32,27 @@
     <%= f.input :poster %>
     <%= f.input :genres, as: :text %>
   </div>
-<%= f.button :submit, class: 'btn btn-success btn-block rounded-0' %>
+    <% options = ['N/A', 1, 2, 3, 4, 5] %>
+  <div class="form-row">
+  <div class="col-6">
+    <%= f.input :mine, label: false do %>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">My Score</div>
+        </div>
+        <%= f.input_field :mine, collection: options, selected: 'N/A', class: 'form-control' %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-6">
+    <%= f.input :partner, label: false do %>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><%= "#{@partner.name}'s Rating" %></div>
+        </div>
+        <%= f.input_field :partner, collection: options, selected: 'N/A', class: 'form-control' %>
+      </div>
+    <% end %>
+  </div>
+  <%= f.button :submit, class: 'btn btn-success btn-block rounded-0' %>
 <% end %>

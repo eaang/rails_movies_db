@@ -23,6 +23,8 @@ class MoviesController < ApplicationController
 
   def new
     @movie = Movie.new
+    @user = current_user
+    @partner = User.where.not(id: @user.id).first
   end
 
   def create
@@ -66,7 +68,7 @@ class MoviesController < ApplicationController
     params.require(:movie).permit(
       :name, :description, :year, :imdb, :director, :writer,
       :production, :awards, :actors, :imdbrating, :metascore, :runtime,
-      :rated, :language, :country, :poster
+      :rated, :language, :country, :poster, :mine, :partner
     )
   end
 end

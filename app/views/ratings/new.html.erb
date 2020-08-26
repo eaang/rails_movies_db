@@ -3,8 +3,8 @@
 <%= simple_form_for :ratings, :url => movie_ratings_path do |f| %>
   <% options = ['N/A', 1, 2, 3, 4, 5] %>
   <div class="form-row">
-  <div class="col-6"><%= f.input :mine, label: "My Rating", collection: options, selected: 'N/A' %></div>
-  <div class="col-6"><%= f.input :partner, label: "#{@partner.name}'s Rating", collection: options, selected: 'N/A' %></div>
+  <div class="col-6"><%= f.input :mine, inline_label: "My Rating", collection: options, selected: 'N/A' %></div>
+  <div class="col-6"><%= f.input :partner, inline_label: "#{@partner.name}'s Rating", collection: options, selected: 'N/A' %></div>
   </div>
   <%= f.button :submit, class: 'btn btn-success btn-block' %>
 <% end %>
