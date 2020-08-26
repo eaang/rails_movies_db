@@ -11,11 +11,16 @@
   <% end %>
 </h1>
 
-<div class="small mb-3">
-  <%= @movie.rated %> | 
-  <%= @movie.showtime %> | 
-  <%= @movie.genres.map { |genre| link_to genre.name, genre }.join(", ").html_safe %> |
-  <%= @movie.country %> (<%= @movie.language %>)
+<div class="mb-3 d-flex flex-wrap justify-content-between">
+  <div class="small">
+    <%= @movie.rated %> | 
+    <%= @movie.showtime %> | 
+    <%= @movie.genres.map { |genre| link_to genre.name, genre }.join(", ").html_safe %> |
+    <%= @movie.country %> (<%= @movie.language %>)
+  </div>
+  <div class="small">
+    My Score: <%= @my_score %> | <%= @partner.name %>'s Score: <%= @partner_score %>
+  </div>
 </div>
 
 <div class="row">
@@ -64,19 +69,6 @@
         <div>
           <%= @movie.average.is_a?(String) ? @movie.average : (number_with_precision(@movie.average, strip_insignificant_zeros: true) + " / 5") %>
         </div>
-      </div>
-    </div>
-
-    <hr/>
-
-    <div class="row">
-      <div class="col-6 text-center">
-      My Score<br>
-      <%= @my_score %>
-      </div>
-      <div class="col-6 text-center">
-      <%= @partner.name %>'s Score<br>
-      <%= @partner_score %>
       </div>
     </div>
 
