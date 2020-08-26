@@ -42,7 +42,7 @@
         <div class="border-bottom d-flex justify-content-between">
           <h4>Plot</h4>
           <% if user_signed_in? %>
-          <button class="btn btn-link p-0 m-0" data-action="click->edit-text#toggle click@window->edit-text#close"><%= icon('fas', 'edit') %></button>
+          <button class="btn btn-link p-0 m-0" data-action="click->edit-text#toggleTextarea click@window->edit-text#close"><%= icon('fas', 'edit') %></button>
           <% end %>
         </div>
         <div class="pt-2" data-target="edit-text.source">
@@ -52,11 +52,35 @@
     </div>
 
     <div class="row my-3">
-      <ul class="list-unstyled mb-0">
-      <% @wanted.each do |thing| %>
-        <li><strong><%= thing.titleize %>:</strong> <%= @movie.send(thing) %>
-      <% end %>
-      </ul>
+      <div class="flex-fill">
+        <div class="border-bottom d-flex justify-content-between">
+          <h4>Details</h4>
+        </div>
+        <div class="col pt-2">
+        <% @wanted.each do |thing| %>
+          <div
+            class="row pb-2 pb-lg-0"
+            data-controller="edit-text"
+            data-edit-text-model="movie"
+            data-edit-text-name="<%= thing %>"
+            data-edit-text-input-class="m-0 flex-fill form-control-sm"
+            data-edit-text-original="<%= @movie.send(thing) %>">
+            <div class="pb-lg-2 pl-0 col-12 col-lg-2"><strong><%= thing.titleize %>:</strong></div> 
+            <div
+              class="flex-fill pl-0 flex-grow"
+              data-target="edit-text.source">
+              <%= @movie.send(thing) %>
+            </div>
+            <% if user_signed_in? %>
+            <div class="pr-0 text-right flex-shrink">
+              <button class="btn btn-link p-0 m-0" data-action="click->edit-text#toggleInput click@window->edit-text#close"><%= icon('fas', 'edit') %></button>
+            </div>
+            <% end %>
+          </div>
+        <% end %>
+        </div>
+      </div>
+
     </div>
 
     <div class="row border-top">
