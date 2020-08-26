@@ -19,19 +19,29 @@ class MoviesController < ApplicationController
   def show
     @wanted = %w[director writer actors production awards]
     @title = @movie.name
+    @partner = User.where.not(id: current_user).first
+    if @partner.id == 1
+      @my_score = @movie.case_rating
+      @partner_score = @movie.evan_rating
+    else
+      @my_score = @movie.evan_rating
+      @partner_score = @movie.case_rating
+    end
   end
 
   def new
     @movie = Movie.new
+    @user = current_user
+    @partner = User.where.not(id: @user.id).first
   end
 
   def create
-    @movie = Movie.new(movie_params)
+    movie = Movie.new(movie_params.except(:mine, :partner))
     genres = params[:movie]["genres"].split(', ')
-    genres.map! { |name| Genre.find_or_create_by(name: name) }
-    genres.each { |genre| @movie.genres << genre }
-    if @movie.save
-      redirect_to new_movie_rating_url(@movie), notice: "#{@movie.name} was successfully created."
+    genres.each { |name| movie.genres << Genre.find_or_create_by(name: name) }
+    if movie.save
+      set_ratings(movie, params[:movie][:mine], params[:movie][:partner])
+      redirect_to movie, notice: "#{movie.name} was successfully created."
     else
       render :new
     end
@@ -56,6 +66,17 @@ class MoviesController < ApplicationController
 
   private
 
+  def set_ratings(movie, my_score, partner_score)
+    Rating.create({ score: my_score.to_i, user: current_user, movie: movie }) if integer?(my_score)
+    return unless integer?(partner_score)
+
+    Rating.create({ score: partner_score.to_i, user: User.where.not(id: current_user).first, movie: movie })
+  end
+
+  def integer?(str)
+    !!(str =~ /^-?\d+(\.\d*)?$/)
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_movie
     @movie = Movie.friendly.find(params[:id])
@@ -66,7 +87,7 @@ class MoviesController < ApplicationController
     params.require(:movie).permit(
       :name, :description, :year, :imdb, :director, :writer,
       :production, :awards, :actors, :imdbrating, :metascore, :runtime,
-      :rated, :language, :country, :poster
+      :rated, :language, :country, :poster, :mine, :partner
     )
   end
 end

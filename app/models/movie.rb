@@ -13,11 +13,19 @@ class Movie < ApplicationRecord
   end
 
   def evan_rating
-    ratings.empty? ? 'N/A' : ratings.first.score
+    if ratings.where(user_id: 1).empty?
+      "N/A"
+    else
+      ratings.where(user_id: 1).first.score
+    end
   end
 
   def case_rating
-    ratings.empty? ? 'N/A' : ratings.last.score
+    if ratings.where(user_id: 2).empty?
+      "N/A"
+    else
+      ratings.where(user_id: 2).first.score
+    end
   end
 
   def average
