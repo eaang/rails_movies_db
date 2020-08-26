@@ -15,23 +15,8 @@
       </div>
     </div>
   </div>
-  <div class="d-none">
-    <%= f.input :actors %>
-    <%= f.input :director %>
-    <%= f.input :year %>
-    <%= f.input :imdb %>
-    <%= f.input :production %>
-    <%= f.input :awards %>
-    <%= f.input :writer %>
-    <%= f.input :imdbrating %>
-    <%= f.input :metascore %>
-    <%= f.input :runtime %>
-    <%= f.input :rated %>
-    <%= f.input :language %>
-    <%= f.input :country, as: :text %>
-    <%= f.input :poster %>
-    <%= f.input :genres, as: :text %>
-  </div>
+
+  <%# Movie Ratings %>
   <% options = ['N/A', 1, 2, 3, 4, 5] %>
   <div class="form-row">
   <div class="col-12 col-md-6">
@@ -58,5 +43,36 @@
       </div>
     <% end %>
   </div>
-  <%= f.button :submit, class: 'btn btn-success btn-block rounded-0' %>
+
+  <%= f.button :submit, class: 'btn btn-success btn-block rounded-0 mb-3' %>
+
+  <%# All Fields %>
+  <div class="col-12 form-row flex-fill text-center">
+    <a id="new-movie-toggle" class="col-12 text-center" data-toggle="collapse" href="#movieFields" role="button" aria-expanded="false" aria-controls="movieFields">
+      show all fields
+    </a>
+  </div>
+
+  <div class="collapse col-12" id="movieFields">
+    <%= f.input :actors %>
+    <%= f.input :director %>
+    <%= f.input :year %>
+    <%= f.input :imdb %>
+    <%= f.input :production %>
+    <%= f.input :awards %>
+    <%= f.input :writer %>
+    <%= f.input :imdbrating %>
+    <%= f.input :metascore %>
+    <%= f.input :runtime %>
+    <%= f.input :rated %>
+    <%= f.input :language %>
+    <%= f.input :country, as: :text %>
+    <%= f.input :poster %>
+    <%= f.input :genres, as: :text %>
+    <div class="col-12 form-row flex-fill text-center">
+      <a id="new-movie-close" class="col-12 text-center" data-toggle="collapse" href="#movieFields" role="button" aria-expanded="false" aria-controls="movieFields">
+        hide all fields
+      </a>
+    </div>
+  </div>
 <% end %>

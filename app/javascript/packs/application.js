@@ -29,6 +29,7 @@ import $ from 'jquery';
 // import { initSelect2 } from '../components/init_select2';
 import { apiCall } from '../components/api_call'
 import { tableCode } from '../components/datatable'
+import { toggler } from '../components/new_movie_toggle'
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
@@ -37,4 +38,5 @@ document.addEventListener('turbolinks:load', () => {
   })
   apiCall();
   tableCode();
+  toggler();
 });
