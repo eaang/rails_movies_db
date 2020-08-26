@@ -21,7 +21,7 @@
 
 <div class="row">
   <div class="col-12 col-sm-6">
-  <h4>5🟊 Movies</h4>
+  <h4>5🟊 Movies (<%= @top_rated.count %>)</h4>
   <ul>
     <% @top_rated.each do |movie| %>
       <li><p class="underline hover:text-gray-700"><%= link_to movie.name, movie %></p></li>
@@ -30,7 +30,7 @@
   </div>
 
   <div class="col-12 col-sm-6">
-  <h4>0🟊 Movies</h4>
+  <h4>0🟊 Movies (<%= @bottom_rated.count %>)</h4>
   <ul>
     <% @bottom_rated.each do |movie| %>
       <li><p class="underline hover:text-gray-700"><%= link_to movie.name, movie %></p></li>
