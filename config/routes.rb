@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  resources :movies do
-    resources :ratings, only: [:new, :create]
-  end
+  resources :movies
   get '/statistics', to: 'movies#stats', as: 'stats'
   resources :genres, only: [:index, :show]
 

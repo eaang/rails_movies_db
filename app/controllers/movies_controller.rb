@@ -19,6 +19,14 @@ class MoviesController < ApplicationController
   def show
     @wanted = %w[director writer actors production awards]
     @title = @movie.name
+    @partner = User.where.not(id: current_user).first
+    if @partner.id == 1
+      @my_score = @movie.case_rating
+      @partner_score = @movie.evan_rating
+    else
+      @my_score = @movie.evan_rating
+      @partner_score = @movie.case_rating
+    end
   end
 
   def new
@@ -39,13 +47,6 @@ class MoviesController < ApplicationController
     end
   end
 
-  def set_ratings(movie, my_score, partner_score)
-    return Rating.create({ score: my_score.to_i, user: current_user, movie: movie }) if my_score.to_i == my_score
-    return nil unless partner_score.to_i == partner_score
-
-    Rating.create({ score: partner_score.to_i, user: User.where.not(id: current_user).first, movie: movie })
-  end
-
   def destroy
     @movie.destroy
     redirect_to movies_path, notice: "#{@movie.name} was successfully deleted."
@@ -64,6 +65,17 @@ class MoviesController < ApplicationController
   end
 
   private
+
+  def set_ratings(movie, my_score, partner_score)
+    Rating.create({ score: my_score.to_i, user: current_user, movie: movie }) if integer?(my_score)
+    return unless integer?(partner_score)
+
+    Rating.create({ score: partner_score.to_i, user: User.where.not(id: current_user).first, movie: movie })
+  end
+
+  def integer?(str)
+    !!(str =~ /^-?\d+(\.\d*)?$/)
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_movie
