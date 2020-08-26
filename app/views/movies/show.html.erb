@@ -31,20 +31,19 @@
 
   <div class="col-md-9 px-4 px-md-3">
 
-    <div class="row">
-    <h4>Plot</h4>
-      <p
-        class="flex-fill"
-        data-controller="inline-edit"
-        data-inline-edit-model="movie"
-        data-inline-edit-name="description"
-        data-inline-edit-original="<%= @movie.description %>"
-        data-inline-edit-input-class="input form-control"
-        data-target="inline-edit.source"
-        data-action="click->inline-edit#toggle click@window->inline-edit#close"
-      >
+    <div 
+      data-controller="edit-text"
+      data-edit-text-model="movie"
+      data-edit-text-name="description"
+      data-edit-text-input-class=""
+      data-edit-text-original="<%= @movie.description %>">
+      <div class="border-bottom flex-fill d-flex justify-content-between">
+        <h4>Plot</h4>
+        <button class="btn btn-link p-0 m-0" data-action="click->edit-text#toggle click@window->edit-text#close"><%= icon('fas', 'edit') %></button>
+      </div>
+      <div class="pt-2" data-target="edit-text.source">
         <%= @movie.description %>
-      </p>
+      </div>
     </div>
 
     <div class="row my-3">
