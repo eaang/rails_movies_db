@@ -38,7 +38,11 @@ const apiCall = () => {
               trigger: 'manual',
               placement: 'top'
             });
-            $('#movie_title').attr("data-content", data.Error).popover('show');
+            if (data.Error === 'Incorrect IMDb ID.') {
+              $('#movie_title').attr("data-content", "Title can't be blank!").popover('show');
+            } else {
+              $('#movie_title').attr("data-content", data.Error).popover('show');
+            }
           } else {
             poster.innerHTML = `<img src="${data.Poster}" class="img-fluid">`
             movieName.value = data.Title

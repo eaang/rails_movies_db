@@ -1,9 +1,12 @@
 <h1>Add New Movie</h1>
 
 <%= simple_form_for @movie, defaults: { input_html: { class: 'rounded-0' } } do |f| %>
-  <div class="form-inline mb-sm-3" id="movie_title">
-    <%= f.input :name, label: false, placeholder: 'Enter movie name', input_html: { class: 'flex-fill rounded-0' }, wrapper_html: { class: 'flex-fill' } %>
+  <div class="mb-3">
+  <small class="form-text text-muted text-right">Click search or press enter to automatically fill out details!</small>
+  <div class="form-inline" id="movie_title">
+    <%= f.input :name, label: false, placeholder: 'Enter movie name', input_html: { class: 'flex-fill rounded-0' }, wrapper_html: { class: 'flex-fill mb-0' } %>
     <%= f.button :button, icon('fas', 'search'), class: 'btn btn-primary align-self-start rounded-0', id: 'movie_button' %>
+  </div>
   </div>
   <div class="form-row">
     <div class="col-12 col-md-9 d-flex">
@@ -54,13 +57,17 @@
   </div>
 
   <div class="collapse col-12" id="movieFields">
-    <%= f.input :actors %>
-    <%= f.input :director %>
+    <div class="form-row">
+      <div class="col"><%= f.input :director %></div>
+      <div class="col"><%= f.input :production %></div>
+    </div>
+    <div class="form-row">
+      <div class="col"><%= f.input :actors %></div>
+      <div class="col"><%= f.input :writer %></div>
+    </div>
     <%= f.input :year %>
     <%= f.input :imdb %>
-    <%= f.input :production %>
     <%= f.input :awards %>
-    <%= f.input :writer %>
     <%= f.input :imdbrating %>
     <%= f.input :metascore %>
     <%= f.input :runtime %>
