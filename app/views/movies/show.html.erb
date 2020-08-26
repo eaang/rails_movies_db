@@ -39,7 +39,9 @@
       data-edit-text-original="<%= @movie.description %>">
       <div class="border-bottom flex-fill d-flex justify-content-between">
         <h4>Plot</h4>
+        <% if user_signed_in? %>
         <button class="btn btn-link p-0 m-0" data-action="click->edit-text#toggle click@window->edit-text#close"><%= icon('fas', 'edit') %></button>
+        <% end %>
       </div>
       <div class="pt-2" data-target="edit-text.source">
         <%= @movie.description %>
