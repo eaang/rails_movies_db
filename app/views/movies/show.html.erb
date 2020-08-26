@@ -32,7 +32,16 @@
   <div class="col-md-8 px-4 px-md-3">
 
     <div class="row font-italic">
-      <%= @movie.description %>
+      <p
+        data-controller="inline-edit"
+        data-inline-edit-model="movie"
+        data-inline-edit-name="description"
+        data-inline-edit-input-class="input"
+        data-target="inline-edit.source"
+        data-action="click->inline-edit#toggle click@window->inline-edit#close"
+      >
+        <%= @movie.description %>
+      </p>
     </div>
 
     <div class="row my-3">

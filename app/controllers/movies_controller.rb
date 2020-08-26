@@ -30,6 +30,17 @@ class MoviesController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @movie.update(movie_params)
+      redirect_to @movie, notice: "#{@movie.name} was successfully updated."
+    else
+      render @movie
+    end
+  end
+
   def new
   end
 

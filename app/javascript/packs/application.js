@@ -30,9 +30,14 @@ import $ from 'jquery';
 import { apiCall } from '../components/api_call'
 import { tableCode } from '../components/datatable'
 import { toggler } from '../components/new_movie_toggle'
+import { Application } from "stimulus"
+import { definitionsFromContext } from "stimulus/webpack-helpers"
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
+  const application = Application.start()
+  const context = require.context("../controllers", true, /\.js$/)
+  application.load(definitionsFromContext(context))
   $(function () {
     $('[data-toggle="popover"]').popover()
   })
@@ -40,3 +45,5 @@ document.addEventListener('turbolinks:load', () => {
   tableCode();
   toggler();
 });
+
+import "controllers"
