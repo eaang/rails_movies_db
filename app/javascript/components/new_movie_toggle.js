@@ -4,9 +4,9 @@ const toggler = () => {
   const changeField = () => {
     const fields = document.querySelector("#movieFields")
     if (fields.classList.contains('show')) {
-      toggle.innerHTML = 'show all fields'
+      toggle.innerHTML = 'show all fields ⏷'
     } else {
-      toggle.innerHTML = 'hide all fields'
+      toggle.innerHTML = 'hide all fields ⏶'
     }
   }
 

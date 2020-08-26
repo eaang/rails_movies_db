@@ -40,11 +40,14 @@ const apiCall = () => {
             });
             if (data.Error === 'Incorrect IMDb ID.') {
               $('#movie_title').attr("data-content", "Title can't be blank!").popover('show');
+              poster.classList.add('p-2', 'border')
             } else {
               $('#movie_title').attr("data-content", data.Error).popover('show');
+              poster.classList.add('p-2', 'border')
             }
           } else {
-            poster.innerHTML = `<img src="${data.Poster}" class="img-fluid">`
+            poster.classList.remove('p-2', 'border')
+            poster.innerHTML = `<img src="${data.Poster}" class="img-fluid mx-auto d-block">`
             movieName.value = data.Title
             movieDescription.value = data.Plot
             movieYear.value = data.Year
