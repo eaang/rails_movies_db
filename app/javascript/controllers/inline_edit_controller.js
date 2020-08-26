@@ -7,6 +7,7 @@ export default class extends Controller {
     this.model        = this.data.get("model")       || "model"
     this.name         = this.data.get("name")        || "name"
     this.input_class  = this.data.get("input-class") || "input"
+    this.original     = this.data.get("original")    || "original"
   }
 
   toggle() {
@@ -35,7 +36,7 @@ export default class extends Controller {
         <input name="utf8" type="hidden" value="✓">
         <input type="hidden" name="_method" value="patch">
         <input type="hidden" name="authenticity_token" value="${this.authenticity_token}">
-        <input type="text" value="${this.input_value}" name="${this.model}[${this.name}]" class="${this.input_class}" id="${this.model}_${this.name}" data-target="inline-edit.input" data-action="onblur->inline-edit#submit">
+        <input type="text" value="${this.original}" name="${this.model}[${this.name}]" class="${this.input_class}" id="${this.model}_${this.name}" data-target="inline-edit.input" data-action="onblur->inline-edit#submit">
       </form>
     `
   }

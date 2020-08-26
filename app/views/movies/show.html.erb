@@ -36,7 +36,8 @@
         data-controller="inline-edit"
         data-inline-edit-model="movie"
         data-inline-edit-name="description"
-        data-inline-edit-input-class="input"
+        data-inline-edit-original="<%= @movie.description %>"
+        data-inline-edit-input-class="input form-control"
         data-target="inline-edit.source"
         data-action="click->inline-edit#toggle click@window->inline-edit#close"
       >
