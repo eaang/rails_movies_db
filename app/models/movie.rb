@@ -17,7 +17,7 @@ class Movie < ApplicationRecord
 
   def evan_rating
     if ratings.where(user_id: 1).empty?
-      "N/A"
+      false
     else
       ratings.where(user_id: 1).first
     end
@@ -25,17 +25,17 @@ class Movie < ApplicationRecord
 
   def case_rating
     if ratings.where(user_id: 2).empty?
-      "N/A"
+      false
     else
       ratings.where(user_id: 2).first
     end
   end
 
   def average
-    if evan_rating.score == 'N/A' || case_rating.score == 'N/A'
-      'N/A'
-    else
+    if evan_rating && case_rating
       (evan_rating.score + case_rating.score) / 2.to_f
+    else
+      false
     end
   end
 

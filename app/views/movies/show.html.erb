@@ -19,7 +19,7 @@
     <%= @movie.country %> (<%= @movie.language %>)
   </div>
   <div class="small">
-    My Score: <%= @my_score.score %> (edit) | <%= @partner.name %>'s Score: <%= @partner_score.score %>
+    My Score: <%= @my_score ? @my_score.score : 'N/A' %> | <%= @partner.name %>'s Score: <%= @partner_score ? @partner_score.score : 'N/A' %>
   </div>
 </div>
 
@@ -77,7 +77,7 @@
       <div class="col-4 text-center">
         <div>Our Score</div>
         <div>
-          <%= @movie.average.is_a?(String) ? @movie.average : (number_with_precision(@movie.average, strip_insignificant_zeros: true) + " / 5") %>
+          <%= @movie.average ? "#{(number_with_precision(@movie.average, strip_insignificant_zeros: true))} / 5" : 'N/A' %>
         </div>
       </div>
     </div>
