@@ -28,15 +28,22 @@ class MoviesController < ApplicationController
   end
 
   def create
-    @movie = Movie.new(movie_params)
+    movie = Movie.new(movie_params.except(:mine, :partner))
     genres = params[:movie]["genres"].split(', ')
-    genres.map! { |name| Genre.find_or_create_by(name: name) }
-    genres.each { |genre| @movie.genres << genre }
-    if @movie.save
-      redirect_to new_movie_rating_url(@movie), notice: "#{@movie.name} was successfully created."
+    genres.each { |name| movie.genres << Genre.find_or_create_by(name: name) }
+    if movie.save
+      set_ratings(movie, params[:movie][:mine], params[:movie][:partner])
+      redirect_to movie, notice: "#{movie.name} was successfully created."
     else
       render :new
     end
+  end
+
+  def set_ratings(movie, my_score, partner_score)
+    return Rating.create({ score: my_score.to_i, user: current_user, movie: movie }) if my_score.to_i == my_score
+    return nil unless partner_score.to_i == partner_score
+
+    Rating.create({ score: partner_score.to_i, user: User.where.not(id: current_user).first, movie: movie })
   end
 
   def destroy
