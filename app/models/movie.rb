@@ -4,6 +4,9 @@ class Movie < ApplicationRecord
   has_many :ratings, dependent: :destroy
   has_and_belongs_to_many :genres
   has_many :users, through: :ratings
+  validates :name, presence: true
+  validates :name, uniqueness: true
+  validates :imdb, uniqueness: true
 
   def data
     require 'json'

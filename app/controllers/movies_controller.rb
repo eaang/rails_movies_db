@@ -1,6 +1,7 @@
 class MoviesController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :show, :stats ]
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
+  before_action :new_movie, only: [:new, :create]
 
   def data(title)
     require 'csv'
@@ -30,20 +31,16 @@ class MoviesController < ApplicationController
   end
 
   def new
-    @movie = Movie.new
-    @user = current_user
-    @partner = User.where.not(id: @user.id).first
   end
 
   def create
     movie = Movie.new(movie_params.except(:mine, :partner))
-    genres = params[:movie]["genres"].split(', ')
-    genres.each { |name| movie.genres << Genre.find_or_create_by(name: name) }
+    add_genres(params[:movie]["genres"], movie)
     if movie.save
-      set_ratings(movie, params[:movie][:mine], params[:movie][:partner])
+      rate_movie(movie, params[:movie][:mine], params[:movie][:partner])
       redirect_to movie, notice: "#{movie.name} was successfully created."
     else
-      render :new
+      redirect_to new_movie_path, notice: movie.errors.full_messages.first
     end
   end
 
@@ -66,7 +63,13 @@ class MoviesController < ApplicationController
 
   private
 
-  def set_ratings(movie, my_score, partner_score)
+  def add_genres(list, movie)
+    list.split(', ').each do |genre|
+      movie.genres << Genre.find_or_create_by(name: genre)
+    end
+  end
+
+  def rate_movie(movie, my_score, partner_score)
     Rating.create({ score: my_score.to_i, user: current_user, movie: movie }) if integer?(my_score)
     return unless integer?(partner_score)
 
@@ -80,6 +83,12 @@ class MoviesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_movie
     @movie = Movie.friendly.find(params[:id])
+  end
+
+  def new_movie
+    @movie = Movie.new
+    @user = current_user
+    @partner = User.where.not(id: @user.id).first
   end
 
   # Only allow a list of trusted parameters through.
