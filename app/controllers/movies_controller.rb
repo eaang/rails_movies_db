@@ -21,6 +21,7 @@ class MoviesController < ApplicationController
     @wanted = %w[director writer stars production awards]
     @title = @movie.name
     @partner = User.where.not(id: current_user).first
+    @rating = Rating.new
     if @partner.id == 1
       @my_score = @movie.case_rating
       @partner_score = @movie.evan_rating
@@ -107,7 +108,7 @@ class MoviesController < ApplicationController
     params.require(:movie).permit(
       :name, :description, :year, :imdb, :director, :writer,
       :production, :awards, :actors, :imdbrating, :metascore, :runtime,
-      :rated, :language, :country, :poster, :mine, :partner
+      :rated, :language, :country, :poster, :mine, :partner, :rating
     )
   end
 end
