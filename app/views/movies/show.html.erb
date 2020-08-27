@@ -32,7 +32,17 @@
 
     </div>
     <div class="small px-1">|</div>
-    <div class="small"><%= @partner.name %>'s Score: <%= @partner_score ? @partner_score.score : 'N/A' %></div>
+    <div class="small">
+      <%= @partner.name %>'s Score: <%= @partner_score ? @partner_score.score : 'N/A' %>
+
+      <span class="btn-group dropdown keep-open">
+        <a class="dropdown-toggle text-muted" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+        <div class="dropdown-menu dropdown-menu-right p-0 border-0">
+          <%= render partial: "shared/rating", locals: { movie_id: @movie.id, user_id: @partner.id, original: (@partner_score ? @partner_score.score : 'N/A') }  %>
+        </div>
+      </span>
+
+    </div>
   </div>
 </div>
 
