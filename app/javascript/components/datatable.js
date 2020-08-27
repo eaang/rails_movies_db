@@ -11,10 +11,10 @@ const tableCode = () => {
     responsive: true,
     stateSave: true,
     "columns": [
-      null,
-      null,
-      null,
-      { "width": "55%" }
+      { "width": "50px" },
+      { "width": "50px" },
+      { "width": "200px" },
+      null
     ]
   })
   .columns.adjust()
