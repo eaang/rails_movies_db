@@ -8,7 +8,7 @@
       <th data-priority="4">Genres</th>
       <th data-priority="5">Plot</th>
       <% if user_signed_in? %>
-      <th data-priority="2"></th>
+      <th data-priority="3">Delete</th>
       <% end %>
     </tr>
   </thead>
@@ -18,9 +18,25 @@
       <td>
         <%= render partial: "shared/modal", locals: {movie: movie} %>
       </td>
-      <td><%= movie.evan_rating %></td>
-      <td><%= movie.case_rating %></td>
-      <td><%= movie.average.is_a?(String) ? movie.average : (number_with_precision(movie.average, strip_insignificant_zeros: true)) %></td>
+      <td>
+        <%= movie.evan_rating ? movie.evan_rating.score : 'N/A' %>
+        <span class="btn-group dropdown keep-open">
+          <a class="dropdown-toggle text-muted" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+          <div class="dropdown-menu dropdown-menu-right p-0 border-0">
+            <%= render partial: "shared/rating", locals: { movie_id: movie.id, user_id: 1, original: (movie.evan_rating ? movie.evan_rating.score : 'N/A') }  %>
+          </div>
+        </span>
+      </td>
+      <td>
+        <%= movie.case_rating ? movie.case_rating.score : 'N/A' %>
+        <span class="btn-group dropdown keep-open">
+          <a class="dropdown-toggle text-muted" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+          <div class="dropdown-menu dropdown-menu-right p-0 border-0">
+            <%= render partial: "shared/rating", locals: { movie_id: movie.id, user_id: 2, original: (movie.case_rating ? movie.case_rating.score : 'N/A') }  %>
+          </div>
+        </span>
+      </td>
+      <td><%= movie.average ? (number_with_precision(movie.average, strip_insignificant_zeros: true)) : 'N/A' %></td>
       <td>
         <%= movie.genres.map { |genre| link_to genre.name, genre }.join(', ').html_safe %>
       </td>

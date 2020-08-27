@@ -29,6 +29,14 @@ import $ from 'jquery';
 // import { initSelect2 } from '../components/init_select2';
 import { apiCall } from '../components/api_call'
 import { tableCode } from '../components/datatable'
+import { toggler } from '../components/new_movie_toggle'
+import { dropdowns } from '../components/dropdowns'
+import { Application } from "stimulus"
+import { definitionsFromContext } from "stimulus/webpack-helpers"
+
+const application = Application.start()
+const context = require.context("../controllers", true, /\.js$/)
+application.load(definitionsFromContext(context))
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
@@ -37,4 +45,8 @@ document.addEventListener('turbolinks:load', () => {
   })
   apiCall();
   tableCode();
+  toggler();
+  dropdowns();
 });
+
+import "controllers"

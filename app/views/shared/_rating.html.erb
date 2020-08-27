@@ -1,0 +1,16 @@
+<%= simple_form_for(Rating.new, method: :post, url: change_path, remote: true) do |f| %>
+  <% options = ['N/A', 0, 1, 2, 3, 4, 5] %>
+  <%= f.hidden_field :movie_id, value: movie_id %>
+  <%= f.hidden_field :user_id, value: user_id %>
+  <div class="d-flex">
+    <div class="col-6 p-0">
+      <%= f.input :score, label: false, collection: options,
+        selected: original, wrapper_html: { class: 'm-0' }, 
+        input_html: { class: 'rounded-0' }, class: 'form-control mr-2' %>
+    </div>
+    <div class="col-3 p-0"><%= button_tag type: 'submit', class: "btn btn-success btn-block rounded-0" do %>
+      <%= icon("fas", "check") %>
+    <% end %></div>
+    <div class="col-3 p-0"><button href class="btn btn-danger btn-block rounded-0"><%= icon("fas", "times") %></button></div>
+  </div>
+<% end %>

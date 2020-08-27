@@ -4,6 +4,9 @@ class Movie < ApplicationRecord
   has_many :ratings, dependent: :destroy
   has_and_belongs_to_many :genres
   has_many :users, through: :ratings
+  validates :name, presence: true
+  validates :name, uniqueness: true
+  validates :imdb, uniqueness: true
 
   def data
     require 'json'
@@ -14,25 +17,25 @@ class Movie < ApplicationRecord
 
   def evan_rating
     if ratings.where(user_id: 1).empty?
-      "N/A"
+      false
     else
-      ratings.where(user_id: 1).first.score
+      ratings.where(user_id: 1).first
     end
   end
 
   def case_rating
     if ratings.where(user_id: 2).empty?
-      "N/A"
+      false
     else
-      ratings.where(user_id: 2).first.score
+      ratings.where(user_id: 2).first
     end
   end
 
   def average
-    if evan_rating == 'N/A' || case_rating == 'N/A'
-      'N/A'
+    if evan_rating && case_rating
+      (evan_rating.score + case_rating.score) / 2.to_f
     else
-      (evan_rating + case_rating) / 2.to_f
+      false
     end
   end
 

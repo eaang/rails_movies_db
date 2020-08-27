@@ -1,44 +1,32 @@
 <h1>Add New Movie</h1>
 
-<%= simple_form_for @movie do |f| %>
-  <div class="form-inline mb-sm-3" id="movie_title">
-    <%= f.input :name, label: false, placeholder: 'Enter movie name', input_html: { class: 'flex-fill rounded-0' }, wrapper_html: { class: 'flex-fill' } %>
+<%= simple_form_for @movie, defaults: { input_html: { class: 'rounded-0' } }, remote: true do |f| %>
+  <div class="mb-3">
+  <small class="form-text text-muted text-right">Click search or press enter to automatically fill out details!</small>
+  <div class="form-inline" id="movie_title">
+    <%= f.input :name, label: false, placeholder: 'Title', input_html: { class: 'flex-fill rounded-0' }, wrapper_html: { class: 'flex-fill mb-0' } %>
     <%= f.button :button, icon('fas', 'search'), class: 'btn btn-primary align-self-start rounded-0', id: 'movie_button' %>
+  </div>
   </div>
   <div class="form-row">
     <div class="col-12 col-md-9 d-flex">
-    <%= f.input :description, label: false, placeholder: 'Movie plot', input_html: { class: 'align-self-stretch rounded-0' }, wrapper_html: { class: 'd-flex flex-fill' } %>
+    <%= f.input :description, label: false, placeholder: 'Description', input_html: { class: 'align-self-stretch rounded-0' }, wrapper_html: { class: 'd-flex flex-fill' } %>
     </div>
     <div class="col-12 col-md-3 pb-3 d-flex">
       <div id="poster" class="border flex-fill justify-content-around p-2">
-      <span class="text-muted">Movie poster</span>
+      <span class="text-muted">Poster</span>
       </div>
     </div>
   </div>
-  <div class="d-none">
-    <%= f.input :actors %>
-    <%= f.input :director %>
-    <%= f.input :year %>
-    <%= f.input :imdb %>
-    <%= f.input :production %>
-    <%= f.input :awards %>
-    <%= f.input :writer %>
-    <%= f.input :imdbrating %>
-    <%= f.input :metascore %>
-    <%= f.input :runtime %>
-    <%= f.input :rated %>
-    <%= f.input :language %>
-    <%= f.input :country, as: :text %>
-    <%= f.input :poster %>
-    <%= f.input :genres, as: :text %>
-  </div>
+
+  <%# Movie Ratings %>
   <% options = ['N/A', 1, 2, 3, 4, 5] %>
   <div class="form-row">
   <div class="col-12 col-md-6">
     <%= f.input :mine, label: false do %>
       <div class="input-group">
         <div class="p-0 input-group-prepend col-3 col-md-4 col-lg-3">
-          <div class="input-group-text flex-fill rounded-0">My Score</div>
+          <div class="input-group-text flex-fill rounded-0">My score</div>
         </div>
         <div class="p-0 d-flex flex-fill col-9 col-md-8 col-lg-9">
           <%= f.input_field :mine, collection: options, selected: 'N/A', class: 'form-control flex-fill rounded-0' %>
@@ -50,7 +38,7 @@
     <%= f.input :partner, label: false do %>
       <div class="input-group">
         <div class="p-0 input-group-prepend col-3 col-md-4 col-lg-3">
-          <div class="input-group-text flex-fill rounded-0"><%= "#{@partner.name}'s Score" %></div>
+          <div class="input-group-text flex-fill rounded-0"><%= "#{@partner.name}'s score" %></div>
         </div>
         <div class="p-0 d-flex flex-fill col-9 col-md-8 col-lg-9">
           <%= f.input_field :partner, collection: options, selected: 'N/A', class: 'form-control flex-fill rounded-0' %>
@@ -58,5 +46,55 @@
       </div>
     <% end %>
   </div>
-  <%= f.button :submit, class: 'btn btn-success btn-block rounded-0' %>
+
+  <%= f.button :submit, class: 'btn btn-success btn-block rounded-0 mb-3' %>
+
+  <%# All Fields %>
+  <div class="col-12 form-row flex-fill text-center mb-3">
+    <a id="new-movie-toggle" class="col-12 text-center text-decoration-none" data-toggle="collapse" href="#movieFields" role="button" aria-expanded="false" aria-controls="movieFields">
+      show all fields ⏷
+    </a>
+  </div>
+
+  <div class="collapse col-12" id="movieFields">
+
+    <div class="form-row">
+      <div class="col"><%= f.input :director, label: 'Directed by', placeholder: 'Director' %></div>
+      <div class="col"><%= f.input :production, label: 'Produced by', placeholder: 'Producer' %></div>
+    </div>
+
+    <div class="form-row">
+      <div class="col"><%= f.input :stars, label: 'Starring', placeholder: 'Actors / Subjects (if documentary)' %></div>
+      <div class="col"><%= f.input :writer, label: 'Written by', placeholder: 'Writer(s)' %></div>
+    </div>
+
+    <div class="form-row">
+      <div class="col"><%= f.input :genres, as: :text, input_html: {value: '' }, placeholder: 'Genres' %></div>
+      <div class="col"><%= f.input :awards, placeholder: 'Awards' %></div>
+    </div>
+
+    <div class="form-row">
+      <div class="col"><%= f.input :imdb, label: 'IMDB ID', placeholder: 'IMDB ID' %></div>
+      <div class="col"><%= f.input :imdbrating, label: 'Rating on IMDB', placeholder: 'IMDB Rating' %></div>
+      <div class="col"><%= f.input :metascore, placeholder: 'Metascore' %></div>
+    </div>
+    
+    <div class="form-row">
+      <div class="col"><%= f.input :year, label: 'Released in', placeholder: 'Year' %></div>
+      <div class="col"><%= f.input :runtime, placeholder: 'Minutes' %></div>
+      <div class="col"><%= f.input :rated, placeholder: 'Rating' %></div>
+    </div>
+    
+    <div class="form-row">
+      <div class="col"><%= f.input :language, placeholder: 'Language' %></div>
+      <div class="col"><%= f.input :country, as: :string, placeholder: 'Countries' %></div>
+      <div class="col"><%= f.input :poster, placeholder: 'Link to poster' %></div>
+    </div>
+
+    <div class="col-12 form-row flex-fill text-center">
+      <a id="new-movie-close" class="col-12 text-center text-decoration-none" data-toggle="collapse" href="#movieFields" role="button" aria-expanded="false" aria-controls="movieFields">
+        hide all fields ⏶
+      </a>
+    </div>
+  </div>
 <% end %>
