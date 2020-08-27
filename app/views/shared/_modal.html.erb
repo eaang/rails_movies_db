@@ -1,7 +1,6 @@
 <!-- Button trigger modal -->
-<button class="btn btn-block btn-link text-left p-0" data-toggle="modal" data-target="#<%= movie.imdb %>">
-  <%= movie.name %>
-</button>
+<a href="#" data-toggle="modal" data-target="#<%= movie.imdb %>"><%= movie.name %></a>
+<%= link_to icon('fas', 'external-link-alt'), movie, target: :_blank, class: 'text-muted' %>
 
 <!-- Modal -->
 <div class="modal fade" id="<%= movie.imdb %>" tabindex="-1" role="dialog" aria-hidden="true">
@@ -27,7 +26,7 @@
                     <%= movie.showtime %> | 
                     <%= movie.country %>
                     <div><strong>Director:</strong> <%= movie.director %></div>
-                    <div><strong>Starring:</strong> <%= movie.actors %></div>
+                    <div><strong>Starring:</strong> <%= movie.stars %></div>
                   </div>
                 </div>
               </div>

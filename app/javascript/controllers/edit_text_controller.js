@@ -58,7 +58,7 @@ export default class extends Controller {
         <input name="utf8" type="hidden" value="✓">
         <input type="hidden" name="_method" value="patch">
         <input type="hidden" name="authenticity_token" value="${this.authenticity_token}">
-        <input type="text" value="${this.original}" name="${this.model}[${this.name}]" class="${this.input_class} form-control" id="${this.model}_${this.name}" data-target="edit-text.input" data-action="onblur->edit-text#submit">
+        <input style="height: 2em;" type="text" value="${this.original}" name="${this.model}[${this.name}]" class="${this.input_class} form-control" id="${this.model}_${this.name}" data-target="edit-text.input" data-action="onblur->edit-text#submit">
       </div>
     </form>
     `
