@@ -33,11 +33,12 @@ import { toggler } from '../components/new_movie_toggle'
 import { Application } from "stimulus"
 import { definitionsFromContext } from "stimulus/webpack-helpers"
 
+const application = Application.start()
+const context = require.context("../controllers", true, /\.js$/)
+application.load(definitionsFromContext(context))
+
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
-  const application = Application.start()
-  const context = require.context("../controllers", true, /\.js$/)
-  application.load(definitionsFromContext(context))
   $(function () {
     $('[data-toggle="popover"]').popover()
   })

@@ -1,7 +1,7 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  static targets = [ "source", "form", "input", "button" ]
+  static targets = [ "source", "form", "input", "button", "confirm" ]
 
   connect() {
     this.model        = this.data.get("model")       || "model"
@@ -13,6 +13,7 @@ export default class extends Controller {
   toggleTextarea() {
     if (!this.data.get("toggled") == 1) {
       this.sourceTarget.innerHTML = this.textform()
+      this.buttonTarget.innerHTML = this.newButton()
 
       this.data.set("toggled", 1)
     }
@@ -21,21 +22,26 @@ export default class extends Controller {
   toggleInput() {
     if (!this.data.get("toggled") == 1) {
       this.sourceTarget.innerHTML = this.inputform()
+      this.buttonTarget.innerHTML = this.newButton()
 
       this.data.set("toggled", 1)
     }
   }
 
   close(event) {
-    if ((this.element.contains(event.target) === false) &&
-      this.data.get("toggled") == 1) {
-
+    if (this.data.get("toggled") == 1) {
       this.submit()
     }
   }
 
   submit() {
     this.formTarget.submit()
+  }
+
+  newButton() {
+    return `
+    <a data-target="edit-text.confirm" data-action="click->edit-text#close" class="btn p-0 m-0">✔</a>
+    `
   }
 
   textform() {

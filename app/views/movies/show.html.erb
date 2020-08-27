@@ -39,10 +39,10 @@
         data-edit-text-name="description"
         data-edit-text-input-class=""
         data-edit-text-original="<%= @movie.description %>">
-        <div class="border-bottom d-flex justify-content-between">
+        <div class="border-bottom d-flex">
           <h4>Plot</h4>
           <% if user_signed_in? %>
-            <button class="btn btn-link p-0 m-0" data-action="click->edit-text#toggleTextarea click@window->edit-text#close"><%= icon('fas', 'edit') %></button>
+            <a data-target="edit-text.button" class="btn p-0 m-0" data-action="click->edit-text#toggleTextarea">✎</a>
           <% end %>
         </div>
         <div class="pt-2" data-target="edit-text.source">
@@ -63,7 +63,7 @@
             data-controller="edit-text"
             data-edit-text-model="movie"
             data-edit-text-name="<%= thing %>"
-            data-edit-text-input-class="m-0 p-0 flex-fill"
+            data-edit-text-input-class="flex-fill"
             data-edit-text-original="<%= @movie.send(thing) %>">
             <div class="pb-lg-2 pl-0 col-12 col-lg-2"><strong class="align-middle"><%= thing.titleize %>:</strong></div> 
             <div
@@ -73,7 +73,7 @@
             </div>
             <% if user_signed_in? %>
             <div class="pr-0 text-right flex-shrink">
-              <button class="edit-button btn btn-link p-0 m-0" data-action="click->edit-text#toggleInput click@window->edit-text#close"><%= icon('fas', 'edit') %></button>
+              <a data-target="edit-text.button" class="btn p-0 m-0" data-action="click->edit-text#toggleInput">✎</a>
             </div>
             <% end %>
           </div>
