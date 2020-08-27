@@ -1,6 +1,6 @@
 <h1>Add New Movie</h1>
 
-<%= simple_form_for @movie, defaults: { input_html: { class: 'rounded-0' } } do |f| %>
+<%= simple_form_for @movie, defaults: { input_html: { class: 'rounded-0' } }, remote: true do |f| %>
   <div class="mb-3">
   <small class="form-text text-muted text-right">Click search or press enter to automatically fill out details!</small>
   <div class="form-inline" id="movie_title">
@@ -64,7 +64,7 @@
     </div>
 
     <div class="form-row">
-      <div class="col"><%= f.input :actors, label: 'Starring', placeholder: 'Actors / Subjects (if documentary)' %></div>
+      <div class="col"><%= f.input :stars, label: 'Starring', placeholder: 'Actors / Subjects (if documentary)' %></div>
       <div class="col"><%= f.input :writer, label: 'Written by', placeholder: 'Writer(s)' %></div>
     </div>
 

@@ -13,7 +13,7 @@ const apiCall = () => {
     const movieWriter = document.querySelector("#movie_writer")
     const movieProduction = document.querySelector("#movie_production")
     const movieAwards = document.querySelector("#movie_awards")
-    const movieActors = document.querySelector("#movie_actors")
+    const movieActors = document.querySelector("#movie_stars")
     const movieImdbrating = document.querySelector("#movie_imdbrating")
     const movieMetascore = document.querySelector("#movie_metascore")
     const movieRuntime = document.querySelector("#movie_runtime")
