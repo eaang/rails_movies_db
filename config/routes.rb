@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   resources :movies
   get '/statistics', to: 'movies#stats', as: 'stats'
+  match '/change', to: 'ratings#change', via: [:get, :post]
   resources :genres, only: [:index, :show]
-  resources :ratings, only: [:create, :update]
 
   devise_for :users
   root to: 'pages#home'

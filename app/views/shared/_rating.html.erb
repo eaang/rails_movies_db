@@ -1,0 +1,7 @@
+<%= simple_form_for(Rating.new, method: :post, url: change_path) do |f| %>
+  <% options = ['N/A', 1, 2, 3, 4, 5] %>
+  <%= f.hidden_field :movie_id, value: movie_id %>
+  <%= f.hidden_field :user_id, value: user_id %>
+  <%= f.input :score, label: false, collection: options, selected: original, class: 'form-control' %>
+  <%= f.submit 'Update', class: 'btn btn-success' %>
+<% end %>

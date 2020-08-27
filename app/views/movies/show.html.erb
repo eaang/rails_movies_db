@@ -24,13 +24,9 @@
       My Score: <%= @my_score ? @my_score.score : 'N/A' %>
 
       <span class="btn-group dropdown keep-open">
-        <button class="btn btn-link btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+        <a class="dropdown-toggle text-muted" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
         <div class="dropdown-menu dropdown-menu-right">
-          <%= simple_form_for @rating do |f| %>
-            <% options = ['N/A', 1, 2, 3, 4, 5] %>
-            <%= f.input :score, label: false, collection: options, selected: (@my_score ? @my_score.score : 'N/A'), class: 'form-control' %>
-            <%= f.submit 'Update', class: 'btn btn-success' %>
-          <% end %>
+          <%= render partial: "shared/rating", locals: { movie_id: @movie.id, user_id: current_user.id, original: (@my_score ? @my_score.score : 'N/A') }  %>
         </div>
       </span>
 

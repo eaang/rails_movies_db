@@ -30,7 +30,7 @@ import $ from 'jquery';
 import { apiCall } from '../components/api_call'
 import { tableCode } from '../components/datatable'
 import { toggler } from '../components/new_movie_toggle'
-import { dropdowns } from '../.components/dropdowns'
+import { dropdowns } from '../components/dropdowns'
 import { Application } from "stimulus"
 import { definitionsFromContext } from "stimulus/webpack-helpers"
 

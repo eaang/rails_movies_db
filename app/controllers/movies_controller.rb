@@ -21,7 +21,6 @@ class MoviesController < ApplicationController
     @wanted = %w[director writer stars production awards]
     @title = @movie.name
     @partner = User.where.not(id: current_user).first
-    @rating = Rating.new
     if @partner.id == 1
       @my_score = @movie.case_rating
       @partner_score = @movie.evan_rating
