@@ -9,7 +9,7 @@ class RatingsController < ApplicationController
       @rating.save
     end
     current_user.id == 1 ? (@my_score = @movie.evan_rating) : (@my_score = @movie.case_rating)
-    redirect_to @movie
+    redirect_to request.referrer
   end
 
   private
