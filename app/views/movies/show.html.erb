@@ -39,7 +39,7 @@
         data-edit-text-name="description"
         data-edit-text-input-class=""
         data-edit-text-original="<%= @movie.description %>">
-        <div class="border-bottom d-flex">
+        <div class="border-bottom d-flex justify-content-between">
           <h4>Plot</h4>
           <% if user_signed_in? %>
             <a data-target="edit-text.button" class="btn p-0 m-0" data-action="click->edit-text#toggleTextarea">✎</a>
@@ -65,14 +65,16 @@
             data-edit-text-name="<%= thing %>"
             data-edit-text-input-class="flex-fill"
             data-edit-text-original="<%= @movie.send(thing) %>">
-            <div class="pb-lg-2 pl-0 col-12 col-lg-2"><strong class="align-middle"><%= thing.titleize %>:</strong></div> 
-            <div
-              class="flex-fill pl-0 flex-grow"
-              data-target="edit-text.source">
-              <span class="align-middle"><%= @movie.send(thing) %></span>
+            <div class="d-flex flex-fill flex-wrap col-11 p-0">
+              <div class="pb-lg-2 pl-0 col-12 col-lg-2"><strong class="align-middle"><%= thing.titleize %></strong></div> 
+              <div
+                class="flex-fill pl-0 flex-grow"
+                data-target="edit-text.source">
+                <span class="align-middle"><%= @movie.send(thing) %></span>
+              </div>
             </div>
             <% if user_signed_in? %>
-            <div class="pr-0 text-right flex-shrink">
+            <div class="pr-0 text-right flex-shrink col-1">
               <a data-target="edit-text.button" class="btn p-0 m-0" data-action="click->edit-text#toggleInput">✎</a>
             </div>
             <% end %>
