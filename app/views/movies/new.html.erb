@@ -74,21 +74,21 @@
     </div>
 
     <div class="form-row">
-      <div class="col"><%= f.input :imdb, label: 'IMDB ID', placeholder: 'IMDB ID' %></div>
-      <div class="col"><%= f.input :imdbrating, label: 'Rating on IMDB', placeholder: 'IMDB Rating' %></div>
-      <div class="col"><%= f.input :metascore, placeholder: 'Metascore' %></div>
+      <div class="col"><%= f.input :imdb, label: 'IMDB ID', disabled: true, placeholder: 'IMDB ID' %></div>
+      <div class="col"><%= f.input :imdbrating, label: 'Rating on IMDB', disabled: true, placeholder: 'IMDB Rating' %></div>
+      <div class="col"><%= f.input :metascore, disabled: true, placeholder: 'Metascore' %></div>
     </div>
     
     <div class="form-row">
-      <div class="col"><%= f.input :year, label: 'Released in', placeholder: 'Year' %></div>
-      <div class="col"><%= f.input :runtime, placeholder: 'Minutes' %></div>
-      <div class="col"><%= f.input :rated, placeholder: 'Rating' %></div>
+      <div class="col"><%= f.input :year, label: 'Released in', disabled: true, placeholder: 'Year' %></div>
+      <div class="col"><%= f.input :runtime, disabled: true, placeholder: 'Minutes' %></div>
+      <div class="col"><%= f.input :rated, disabled: true, placeholder: 'Rating' %></div>
     </div>
     
     <div class="form-row">
-      <div class="col"><%= f.input :language, placeholder: 'Language' %></div>
-      <div class="col"><%= f.input :country, as: :string, placeholder: 'Countries' %></div>
-      <div class="col"><%= f.input :poster, placeholder: 'Link to poster' %></div>
+      <div class="col"><%= f.input :language, disabled: true, placeholder: 'Language' %></div>
+      <div class="col"><%= f.input :country, disabled: true, as: :string, placeholder: 'Countries' %></div>
+      <div class="col"><%= f.input :poster, disabled: true, placeholder: 'Link to poster' %></div>
     </div>
 
     <div class="col-12 form-row flex-fill text-center">
