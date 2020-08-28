@@ -7,11 +7,22 @@
     <div class="navbar-nav mr-auto mt-2 mt-lg-0">
       <%= link_to "All Movies", movies_path, class: "nav-item nav-link" %>
       <%= link_to "All Genres", genres_path, class: "nav-item nav-link" %>
-      <%= link_to "Statistics", stats_path, class: "nav-item nav-link" %>
+      <%= link_to "Our Stats", stats_path, class: "nav-item nav-link" %>
+      <% if user_signed_in? %>
+        <%= link_to "My Stats", user_path(current_user), class: "nav-item nav-link" %>
+      <% end %>
     </div>
     <div class="navbar-nav">
       <% if user_signed_in? %>
-        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "rounded-0 btn btn-outline-danger mr-lg-3 mb-2 mb-lg-0" %>
+        <div class="btn-group mr-lg-3 mb-2 mb-lg-0">
+          <button type="button" class="btn btn-secondary dropdown-toggle rounded-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Account
+          </button>
+          <div class="dropdown-menu dropdown-menu-right rounded-0">
+            <%= link_to "Edit Info", edit_user_path(current_user), class: "dropdown-item" %>
+            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+          </div>
+        </div>
         <%= link_to "New movie", new_movie_path, class: "rounded-0 btn btn-primary" %>
       <% else %>
         <%= link_to "Login", new_user_session_path, class: "rounded-0 btn btn-primary" %>
